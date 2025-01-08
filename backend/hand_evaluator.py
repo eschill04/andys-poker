@@ -161,6 +161,13 @@ class PokerHandEvaluator:
         
     def return_winners(self, hands, high):
 
+        # if low, replace all aces with ones
+        if not high:
+            for i in range(len(hands)):
+                for j in range(len(hands[i])):
+                    if hands[i][j].rank == 14:
+                        hands[i][j].rank = 1
+
         rankings = {i: self.hand_rankings[self.evaluate_hand(hand)] for i, hand in enumerate(hands)}
         if high:
             highest_ranking = max(rankings.values())

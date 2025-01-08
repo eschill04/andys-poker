@@ -9,7 +9,8 @@ RANKS = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
 
 
 class Game:
-    def __init__(self):
+    def __init__(self, game_id=0):
+        self.gid = game_id
         self.players = []
         self.hands = {}
         self.bets = {}
@@ -46,6 +47,7 @@ class Game:
     # For now, just deal 5 cards to each player. Later, maybe per player function? 
     def deal_cards(self, username):
         self.hands[username] = self.deck.deal(5)
+        self.hands[username].sort(key=lambda card: card.rank)
         return [[card.card_string, card.wild] for card in self.hands[username]]
         
     
@@ -63,10 +65,12 @@ class Game:
         new = Card(new_suit, int(new_rank))
         new.wild = True
         
+        found = False
         for i in range(len(self.hands[username])):
-            if self.hands[username][i].card_string == old:
+            if self.hands[username][i].card_string == old and not found and self.hands[username][i].wild:
                 self.hands[username][i] = new
-                break
+                found = True
+        
         return [[card.card_string, card.wild] for card in self.hands[username]]
 
     def make_bet(self, username, bet, direction):
