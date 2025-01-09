@@ -1,4 +1,8 @@
-# Image Gallery
+# Andy's Poker
+
+### An Online Multiplayer Chip-Free Poker Game
+
+Inspired by my dad, Andrew (Andy) Schiller, inventer of the in-person version. <3
 
 ![Image 1](demo_imgs/image1.png)
 ![Image 2](demo_imgs/image2.png)
